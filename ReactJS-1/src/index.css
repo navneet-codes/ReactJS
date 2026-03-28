@@ -8,4 +8,41 @@ html,
 body {
   width: 100%;
   height: 100%;
+  background-color: grey;
+}
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.Card1 {
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* horizontal center */
+  justify-content: center; /* vertical center */
+  background-color: black;
+  color: white;
+  border-radius: 15px;
+  padding: 15px;
+  margin-top: 50px;
+  margin-left: 20px;
+}
+.Card1 img {
+  width: 160px;
+  height: 200px;
+  border-radius: 500%;
+  object-fit: cover;
+}
+p {
+  text-align: center;
+  padding: 20px;
+}
+
+button {
+  border-radius: 12px;
+  width: 100px;
+  height: 30px;
 }
