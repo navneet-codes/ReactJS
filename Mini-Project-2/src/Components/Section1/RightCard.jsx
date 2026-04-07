@@ -3,7 +3,7 @@ import RightCardContent from "./RightCardContent";
 
 const RightCard = (props) => {
   return (
-    <div className=" h-full shrink-0 w-75 relative bg-gray-800 rounded-4xl overflow-hidden">
+    <div className=" h-full min-w-65 shrink-0 w-75 relative bg-gray-800 rounded-4xl overflow-hidden">
       <img
         className=" h-full w-full  object-cover"
         src={props.img}

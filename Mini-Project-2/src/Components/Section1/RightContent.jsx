@@ -4,7 +4,7 @@ const RightContent = (props) => {
   return (
     <div
       id="RightContent"
-      className=" h-full rounded-4xl flex overflow-x-auto no-scrollbar flex-nowrap gap-7 w-5/8 p-6"
+      className=" h-full rounded-4xl flex overflow-x-auto flex-nowrap gap-7 w-5/8 p-6"
     >
       {props.users.map((elem, index) => (
         <RightCard
