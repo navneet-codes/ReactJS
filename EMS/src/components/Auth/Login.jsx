@@ -2,21 +2,22 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 
-const Login = () => {
+const Login = ({ handleLogin }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log("email", email);
-    console.log("password", password);
+    handleLogin(email, password);
+    // console.log("email", email);
+    // console.log("password", password);
 
     setEmail("");
     setPassword("");
   };
 
   return (
-    <div className=" flex justify-center items-center h-full w-full bg-linear-to-tl from-[#BBD2C5] from-10% to-[#536976] text-white p-2 ">
+    <div className=" flex justify-center items-center h-screen w-full bg-linear-to-tl from-[#BBD2C5] from-10% to-[#536976] text-white p-2 ">
       <form
         onSubmit={(e) => {
           submitHandler(e);
@@ -25,7 +26,7 @@ const Login = () => {
       >
         <div className=" flex flex-col items-center w-full h-full gap-20 ">
           <FontAwesomeIcon
-            className=" text-7xl rounded-full object-fit "
+            className=" text-7xl rounded-full object-cover "
             icon={faUser}
             beatFade
           />
@@ -58,7 +59,6 @@ const Login = () => {
           <div className=" w-full flex flex-row justify-between text-gray-500">
             <div className=" flex flex-row items-center">
               <input
-                className=" "
                 type="checkbox"
                 name="Remember_me"
                 className="mt-1"
