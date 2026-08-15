@@ -7,7 +7,7 @@ import { AuthContext } from "./context/AuthProvider";
 
 const App = () => {
   const [session, setSession] = useState(() => {
-    const raw = localStorage.getItem("loggedInUser");
+    const raw = sessionStorage.getItem("loggedInUser");
     return raw ? JSON.parse(raw) : null;
   });
   const { userData } = useContext(AuthContext);
@@ -15,7 +15,7 @@ const App = () => {
   //hadling Log out feature
   const handleLogout = () => {
     setSession(null);
-    localStorage.removeItem("loggedInUser");
+    sessionStorage.removeItem("loggedInUser");
   };
 
   const currentUser = useMemo(() => {
@@ -44,7 +44,7 @@ const App = () => {
     if (!found) return alert("Invalid Credentials");
 
     setSession(found);
-    localStorage.setItem("loggedInUser", JSON.stringify(found));
+    sessionStorage.setItem("loggedInUser", JSON.stringify(found));
   };
 
   return (
