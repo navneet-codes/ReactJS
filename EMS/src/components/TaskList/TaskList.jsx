@@ -7,18 +7,18 @@ import CompleteTask from "./CompleteTask";
 const TaskList = ({ data }) => {
   return (
     <div className=" flex flex-wrap no-scrollbar overflow-y-auto">
-      {data.tasks.map((elem, id) => {
+      {data.tasks.map((elem) => {
         if (elem.active) {
-          return <AcceptTask key={id} data={elem} />;
+          return <AcceptTask key={elem.id} data={elem} />;
         }
         if (elem.newTask) {
-          return <NewTask key={id} data={elem} />;
+          return <NewTask key={elem.id} data={elem} />;
         }
         if (elem.completed) {
-          return <CompleteTask key={id} data={elem} />;
+          return <CompleteTask key={elem.id} data={elem} />;
         }
         if (elem.failed) {
-          return <FailedTask key={id} data={elem} />;
+          return <FailedTask key={elem.id} data={elem} />;
         }
       })}
     </div>

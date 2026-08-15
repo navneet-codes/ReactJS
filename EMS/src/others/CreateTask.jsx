@@ -1,39 +1,49 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { AuthContext } from "../context/AuthProvider";
 
 const CreateTask = () => {
   const [taskTitle, setTaskTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [date, setDate] = useState("");
+  const [taskDescription, setTaskDescription] = useState("");
+  const [taskDate, setTaskDate] = useState("");
   const [assign, setAssign] = useState("");
   const [category, setCategory] = useState("");
 
-  const [newTask, setNewTask] = useState({});
+  const authData = useContext(AuthContext);
 
   const submitHandler = (e) => {
     e.preventDefault();
 
-    setNewTask({
+    const task = {
+      id: crypto.randomUUID(),
       taskTitle,
-      description,
-      date,
+      taskDescription,
+      taskDate,
       category,
       active: false,
       newTask: true,
-      failed: false,
       completed: false,
-    });
+    };
 
-    const data = JSON.parse(localStorage.getItem("Employees"));
+    // const data = JSON.parse(localStorage.getItem("Employees"));
 
-    data.forEach((elem) => {
-      if (assign == elem.firstName) {
-        console.log("user already exist ");
-      }
-    });
+    // data.forEach((elem) => {
+    //   if (assign === elem.firstName) {
+    //     elem.tasks.push(task);
+    //   }
+    // });
+
+    authData.setUserData((prev) => ({
+      ...prev,
+      Employees: prev.Employees.map((emp) =>
+        emp.firstName === assign
+          ? { ...emp, tasks: [...emp.tasks, task] }
+          : emp,
+      ),
+    }));
 
     setTaskTitle("");
-    setDescription("");
-    setDate("");
+    setTaskDescription("");
+    setTaskDate("");
     setAssign("");
     setCategory("");
   };
@@ -64,9 +74,9 @@ const CreateTask = () => {
           id=""
           cols={30}
           rows={10}
-          value={description}
+          value={taskDescription}
           onChange={(e) => {
-            setDescription(e.target.value);
+            setTaskDescription(e.target.value);
           }}
         ></textarea>
         <br />
@@ -74,9 +84,9 @@ const CreateTask = () => {
         <input
           className=" bg-gray-700"
           type="date"
-          value={date}
+          value={taskDate}
           onChange={(e) => {
-            setDate(e.target.value);
+            setTaskDate(e.target.value);
           }}
         />
         <br />
