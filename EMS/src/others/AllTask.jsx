@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
-import { AuthContext } from "../context/AuthProvider";
+import React from "react";
 import { getTaskCounts } from "../utils/taskCounts";
+import { useAuth } from "../context/useAuth";
 
 const AllTask = () => {
-  const authData = useContext(AuthContext);
+  const { userData } = useAuth();
 
   return (
     <div className=" flex flex-col items-center mt-20 overflow-auto">
@@ -15,7 +15,7 @@ const AllTask = () => {
         <h5 className=" w-1/5 ">Failed</h5>
       </div>
 
-      {authData.userData.Employees.map((element) => {
+      {userData.Employees.map((element) => {
         const counts = getTaskCounts(element.tasks);
 
         return (

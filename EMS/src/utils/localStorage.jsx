@@ -1,3 +1,8 @@
+export const STORAGE_KEYS = {
+  employees: "Employees_v2",
+  admin: "Admin_v2",
+};
+
 const Employees = [
   {
     id: "emp-1",
@@ -8,10 +13,7 @@ const Employees = [
     tasks: [
       {
         id: "t-1-1",
-        active: true,
-        newTask: true,
-        completed: false,
-        failed: false,
+        status: "new",
         taskTitle: "Prepare sales report",
         taskDescription:
           "Create the monthly sales report and submit it to the manager.",
@@ -20,10 +22,7 @@ const Employees = [
       },
       {
         id: "t-1-2",
-        active: false,
-        newTask: false,
-        completed: true,
-        failed: false,
+        status: "completed",
         taskTitle: "Update client database",
         taskDescription: "Verify and update client contact details in the CRM.",
         taskDate: "2026-06-20",
@@ -31,10 +30,7 @@ const Employees = [
       },
       {
         id: "t-1-3",
-        active: true,
-        newTask: false,
-        completed: false,
-        failed: false,
+        status: "active",
         taskTitle: "Follow up with leads",
         taskDescription: "Call pending leads and update their response status.",
         taskDate: "2026-06-27",
@@ -52,10 +48,7 @@ const Employees = [
     tasks: [
       {
         id: "t-2-1",
-        active: true,
-        newTask: true,
-        completed: false,
-        failed: false,
+        status: "new",
         taskTitle: "Fix login page bug",
         taskDescription:
           "Resolve the authentication issue on the employee login page.",
@@ -64,10 +57,7 @@ const Employees = [
       },
       {
         id: "t-2-2",
-        active: false,
-        newTask: false,
-        completed: true,
-        failed: false,
+        status: "completed",
         taskTitle: "Code review",
         taskDescription: "Review pull requests submitted by the frontend team.",
         taskDate: "2026-06-22",
@@ -75,10 +65,7 @@ const Employees = [
       },
       {
         id: "t-2-3",
-        active: false,
-        newTask: false,
-        completed: false,
-        failed: true,
+        status: "failed",
         taskTitle: "Deploy dashboard update",
         taskDescription: "Deploy the latest dashboard version to production.",
         taskDate: "2026-06-21",
@@ -86,10 +73,7 @@ const Employees = [
       },
       {
         id: "t-2-4",
-        active: true,
-        newTask: false,
-        completed: false,
-        failed: false,
+        status: "active",
         taskTitle: "Optimize API response",
         taskDescription: "Improve response time of the employee task API.",
         taskDate: "2026-06-28",
@@ -107,10 +91,7 @@ const Employees = [
     tasks: [
       {
         id: "t-3-1",
-        active: true,
-        newTask: true,
-        completed: false,
-        failed: false,
+        status: "new",
         taskTitle: "Design landing page",
         taskDescription:
           "Create a clean UI design for the company landing page.",
@@ -119,10 +100,7 @@ const Employees = [
       },
       {
         id: "t-3-2",
-        active: false,
-        newTask: false,
-        completed: true,
-        failed: false,
+        status: "completed",
         taskTitle: "Create banner graphics",
         taskDescription:
           "Design promotional banners for the marketing campaign.",
@@ -131,10 +109,7 @@ const Employees = [
       },
       {
         id: "t-3-3",
-        active: true,
-        newTask: false,
-        completed: false,
-        failed: false,
+        status: "active",
         taskTitle: "Update brand colors",
         taskDescription: "Apply updated brand colors across the website pages.",
         taskDate: "2026-06-29",
@@ -152,10 +127,7 @@ const Employees = [
     tasks: [
       {
         id: "t-4-1",
-        active: true,
-        newTask: true,
-        completed: false,
-        failed: false,
+        status: "new",
         taskTitle: "Test payment flow",
         taskDescription: "Check the complete payment flow and report any bugs.",
         taskDate: "2026-06-26",
@@ -163,10 +135,7 @@ const Employees = [
       },
       {
         id: "t-4-2",
-        active: false,
-        newTask: false,
-        completed: true,
-        failed: false,
+        status: "completed",
         taskTitle: "Write test cases",
         taskDescription:
           "Prepare test cases for the employee dashboard module.",
@@ -175,10 +144,7 @@ const Employees = [
       },
       {
         id: "t-4-3",
-        active: false,
-        newTask: false,
-        completed: false,
-        failed: true,
+        status: "failed",
         taskTitle: "Verify email notifications",
         taskDescription: "Check if email notifications are working correctly.",
         taskDate: "2026-06-21",
@@ -186,10 +152,7 @@ const Employees = [
       },
       {
         id: "t-4-4",
-        active: true,
-        newTask: false,
-        completed: false,
-        failed: false,
+        status: "active",
         taskTitle: "Bug report analysis",
         taskDescription: "Analyze reported bugs and assign priority levels.",
         taskDate: "2026-06-28",
@@ -207,10 +170,7 @@ const Employees = [
     tasks: [
       {
         id: "t-5-1",
-        active: true,
-        newTask: true,
-        completed: false,
-        failed: false,
+        status: "new",
         taskTitle: "Prepare marketing plan",
         taskDescription:
           "Create a weekly marketing plan for social media promotion.",
@@ -219,10 +179,7 @@ const Employees = [
       },
       {
         id: "t-5-2",
-        active: false,
-        newTask: false,
-        completed: true,
-        failed: false,
+        status: "completed",
         taskTitle: "Analyze campaign data",
         taskDescription: "Review ad campaign performance and prepare insights.",
         taskDate: "2026-06-20",
@@ -230,10 +187,7 @@ const Employees = [
       },
       {
         id: "t-5-3",
-        active: true,
-        newTask: false,
-        completed: false,
-        failed: false,
+        status: "active",
         taskTitle: "Schedule social posts",
         taskDescription: "Schedule posts for LinkedIn, Instagram, and Twitter.",
         taskDate: "2026-06-29",
@@ -241,10 +195,7 @@ const Employees = [
       },
       {
         id: "t-5-4",
-        active: false,
-        newTask: false,
-        completed: false,
-        failed: true,
+        status: "failed",
         taskTitle: "Client feedback summary",
         taskDescription: "Collect and summarize feedback from recent clients.",
         taskDate: "2026-06-22",
@@ -266,17 +217,17 @@ const Admin = [
 // export { Employees, Admin };
 
 export const setLocalStorage = () => {
-  if (!localStorage.getItem("Employees")) {
-    localStorage.setItem("Employees", JSON.stringify(Employees));
+  if (!localStorage.getItem(STORAGE_KEYS.employees)) {
+    localStorage.setItem(STORAGE_KEYS.employees, JSON.stringify(Employees));
   }
-  if (!localStorage.getItem("Admin")) {
-    localStorage.setItem("Admin", JSON.stringify(Admin));
+  if (!localStorage.getItem(STORAGE_KEYS.admin)) {
+    localStorage.setItem(STORAGE_KEYS.admin, JSON.stringify(Admin));
   }
 };
 
 export const getLocalStorage = () => {
-  const Employees = JSON.parse(localStorage.getItem("Employees"));
-  const Admin = JSON.parse(localStorage.getItem("Admin"));
+  const Employees = JSON.parse(localStorage.getItem(STORAGE_KEYS.employees));
+  const Admin = JSON.parse(localStorage.getItem(STORAGE_KEYS.admin));
 
   return { Employees, Admin };
   // console.log(JSON.parse(Employees), JSON.parse(Admin));
