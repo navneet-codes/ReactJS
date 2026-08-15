@@ -1,16 +1,16 @@
-import React, { useContext, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import Login from "./components/Auth/Login";
 import EmployeeDashboard from "./components/Dashboard/EmployeeDashboard";
 import AdminDashboard from "./components/Dashboard/AdminDashboard";
 
-import { AuthContext } from "./context/AuthProvider";
+import { useAuth } from "./context/useAuth";
 
 const App = () => {
   const [session, setSession] = useState(() => {
     const raw = sessionStorage.getItem("loggedInUser");
     return raw ? JSON.parse(raw) : null;
   });
-  const { userData } = useContext(AuthContext);
+  const { userData } = useAuth();
 
   //hadling Log out feature
   const handleLogout = () => {
