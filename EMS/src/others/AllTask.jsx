@@ -15,12 +15,12 @@ const AllTask = () => {
         <h5 className=" w-1/5 ">Failed</h5>
       </div>
 
-      {authData.userData.Employees.map((element, idx) => {
+      {authData.userData.Employees.map((element) => {
         const counts = getTaskCounts(element.tasks);
 
         return (
           <div
-            key={idx}
+            key={element.id}
             className=" flex justify-between mb-10 bg-emerald-500 py-2 px-4 rounded-xl w-[80%] "
           >
             <h2 className=" text-xl w-1/5 ">{element.firstName}</h2>

@@ -1,12 +1,13 @@
 const Employees = [
   {
-    id: 1,
+    id: "emp-1",
     firstName: "Aarav",
     email: "employee1@example.com",
     password: "12345678",
 
     tasks: [
       {
+        id: "t-1-1",
         active: true,
         newTask: true,
         completed: false,
@@ -18,6 +19,7 @@ const Employees = [
         category: "Reports",
       },
       {
+        id: "t-1-2",
         active: false,
         newTask: false,
         completed: true,
@@ -28,6 +30,7 @@ const Employees = [
         category: "Database",
       },
       {
+        id: "t-1-3",
         active: true,
         newTask: false,
         completed: false,
@@ -41,13 +44,14 @@ const Employees = [
   },
 
   {
-    id: 2,
+    id: "emp-2",
     firstName: "Rohan",
     email: "employee2@example.com",
     password: "12345678",
 
     tasks: [
       {
+        id: "t-2-1",
         active: true,
         newTask: true,
         completed: false,
@@ -59,6 +63,7 @@ const Employees = [
         category: "Development",
       },
       {
+        id: "t-2-2",
         active: false,
         newTask: false,
         completed: true,
@@ -69,6 +74,7 @@ const Employees = [
         category: "Development",
       },
       {
+        id: "t-2-3",
         active: false,
         newTask: false,
         completed: false,
@@ -79,6 +85,7 @@ const Employees = [
         category: "Deployment",
       },
       {
+        id: "t-2-4",
         active: true,
         newTask: false,
         completed: false,
@@ -92,13 +99,14 @@ const Employees = [
   },
 
   {
-    id: 3,
+    id: "emp-3",
     firstName: "Priya",
     email: "employee3@example.com",
     password: "12345678",
 
     tasks: [
       {
+        id: "t-3-1",
         active: true,
         newTask: true,
         completed: false,
@@ -110,6 +118,7 @@ const Employees = [
         category: "Design",
       },
       {
+        id: "t-3-2",
         active: false,
         newTask: false,
         completed: true,
@@ -121,6 +130,7 @@ const Employees = [
         category: "Design",
       },
       {
+        id: "t-3-3",
         active: true,
         newTask: false,
         completed: false,
@@ -134,13 +144,14 @@ const Employees = [
   },
 
   {
-    id: 4,
+    id: "emp-4",
     firstName: "Ananya",
     email: "employee4@example.com",
     password: "12345678",
 
     tasks: [
       {
+        id: "t-4-1",
         active: true,
         newTask: true,
         completed: false,
@@ -151,6 +162,7 @@ const Employees = [
         category: "Testing",
       },
       {
+        id: "t-4-2",
         active: false,
         newTask: false,
         completed: true,
@@ -162,6 +174,7 @@ const Employees = [
         category: "QA",
       },
       {
+        id: "t-4-3",
         active: false,
         newTask: false,
         completed: false,
@@ -172,6 +185,7 @@ const Employees = [
         category: "Testing",
       },
       {
+        id: "t-4-4",
         active: true,
         newTask: false,
         completed: false,
@@ -185,13 +199,14 @@ const Employees = [
   },
 
   {
-    id: 5,
+    id: "emp-5",
     firstName: "Vikram",
     email: "employee5@example.com",
     password: "12345678",
 
     tasks: [
       {
+        id: "t-5-1",
         active: true,
         newTask: true,
         completed: false,
@@ -203,6 +218,7 @@ const Employees = [
         category: "Marketing",
       },
       {
+        id: "t-5-2",
         active: false,
         newTask: false,
         completed: true,
@@ -213,6 +229,7 @@ const Employees = [
         category: "Analytics",
       },
       {
+        id: "t-5-3",
         active: true,
         newTask: false,
         completed: false,
@@ -223,6 +240,7 @@ const Employees = [
         category: "Social Media",
       },
       {
+        id: "t-5-4",
         active: false,
         newTask: false,
         completed: false,
@@ -238,7 +256,7 @@ const Employees = [
 
 const Admin = [
   {
-    id: 1,
+    id: "admin-1",
     firstName: "Rajesh",
     email: "admin@example.com",
     password: "12345678",

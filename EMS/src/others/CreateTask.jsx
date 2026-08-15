@@ -14,6 +14,7 @@ const CreateTask = () => {
     e.preventDefault();
 
     const task = {
+      id: crypto.randomUUID(),
       taskTitle,
       taskDescription,
       taskDate,
