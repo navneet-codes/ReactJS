@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 
 import { useAuth } from "../context/useAuth";
 
@@ -6,13 +6,23 @@ const CreateTask = () => {
   const [taskTitle, setTaskTitle] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
   const [taskDate, setTaskDate] = useState("");
-  const [assign, setAssign] = useState("");
-  const [category, setCategory] = useState("");
 
-  const { setUserData } = useAuth();
+  const [category, setCategory] = useState("");
+  const [assignedId, setAssignedId] = useState("");
+  const [feedback, setFeedback] = useState(null);
+
+  const { userData, createTask } = useAuth();
 
   const submitHandler = (e) => {
     e.preventDefault();
+
+    const employee = userData.Employees.find((emp) => emp.id === assignedId);
+
+    if (!employee) {
+      setFeedback({ ok: false, text: "Please select an employee. " });
+
+      return;
+    }
 
     const task = {
       id: crypto.randomUUID(),
@@ -23,92 +33,104 @@ const CreateTask = () => {
       status: "new",
     };
 
-    // const data = JSON.parse(localStorage.getItem("Employees"));
+    createTask(assignedId, task);
 
-    // data.forEach((elem) => {
-    //   if (assign === elem.firstName) {
-    //     elem.tasks.push(task);
-    //   }
-    // });
-
-    setUserData((prev) => ({
-      ...prev,
-      Employees: prev.Employees.map((emp) =>
-        emp.firstName === assign
-          ? { ...emp, tasks: [...emp.tasks, task] }
-          : emp,
-      ),
-    }));
+    setFeedback({ ok: true, text: `Task assigned to ${employee.firstName}.` });
 
     setTaskTitle("");
     setTaskDescription("");
     setTaskDate("");
-    setAssign("");
     setCategory("");
+    setAssignedId("");
   };
 
   return (
     <div className=" flex justify-center items-center ">
       <form
-        className=" flex flex-col w-[50%] p-10 mt-20 bg-black rounded-3xl "
+        className=" flex gap-4 flex-col w-[50%] p-10 mt-20 bg-black rounded-3xl "
         onSubmit={(e) => {
           submitHandler(e);
         }}
       >
-        <h3>Task Title</h3>
+        <label htmlFor="taskTitle">Task Title</label>
         <input
+          id="taskTitle"
+          name="taskTitle"
           className=" bg-gray-700"
           type="text"
           placeholder=" Make a Request"
           value={taskTitle}
+          required
           onChange={(e) => {
             setTaskTitle(e.target.value);
           }}
         />
-        <br />
-        <h3>Description</h3>
+
+        <label htmlFor="taskDescription">Description</label>
         <textarea
           className=" bg-gray-700"
-          name=""
-          id=""
+          name="taskDescription"
+          id="taskDescription"
           cols={30}
           rows={10}
           value={taskDescription}
+          required
           onChange={(e) => {
             setTaskDescription(e.target.value);
           }}
         ></textarea>
-        <br />
-        <h3>Date</h3>
+
+        <label htmlFor="taskDate">Date</label>
         <input
+          id="taskDate"
+          name="taskDate"
           className=" bg-gray-700"
           type="date"
           value={taskDate}
+          required
           onChange={(e) => {
             setTaskDate(e.target.value);
           }}
         />
-        <br />
-        <h3>Assign</h3>
+
+        <label htmlFor="assign">Assign to</label>
+        <select
+          id="assign"
+          name="assign"
+          className="bg-gray-700"
+          value={assignedId}
+          onChange={(e) => setAssignedId(e.target.value)}
+          required
+        >
+          <option value="">Select an employee</option>
+          {userData.Employees.map((emp) => (
+            <option key={emp.id} value={emp.id}>
+              {emp.firstName}
+            </option>
+          ))}
+        </select>
+
+        <label htmlFor="category">Category</label>
         <input
           className=" bg-gray-700"
-          type="text"
-          value={assign}
-          onChange={(e) => {
-            setAssign(e.target.value);
-          }}
-        />
-        <br />
-        <h3>Category</h3>
-        <input
-          className=" bg-gray-700"
+          id="category"
+          name="category"
           type="text"
           value={category}
+          required
           onChange={(e) => {
             setCategory(e.target.value);
           }}
         />
-        <br />
+
+        {feedback && (
+          <p
+            role="status"
+            className={feedback.ok ? "text-green-400" : "text-red-400"}
+          >
+            {feedback.text}
+          </p>
+        )}
 
         <div className=" flex justify-center ">
           <button className="  bg-red-600 w-30 h-10 rounded-4xl active:scale-90 font-bold">

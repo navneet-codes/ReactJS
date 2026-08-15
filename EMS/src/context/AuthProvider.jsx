@@ -5,25 +5,36 @@ import { getLocalStorage, STORAGE_KEYS } from "../utils/localStorage";
 const AuthProvider = ({ children }) => {
   const [userData, setUserData] = useState(() => getLocalStorage());
 
-  const updateTaskStatus = useCallback((employeeId, taskId, status) => {
+  // Every task mutation has the same shape: find one employee, replace their
+  // task list. Written once here so callers only describe the change.
+  const updateEmployeeTasks = useCallback((employeeId, transformTasks) => {
     setUserData((prev) => ({
       ...prev,
       Employees: prev.Employees.map((emp) =>
         emp.id !== employeeId
           ? emp
-          : {
-              ...emp,
-              tasks: emp.tasks.map((task) =>
-                task.id !== taskId ? task : { ...task, status },
-              ),
-            },
+          : { ...emp, tasks: transformTasks(emp.tasks) },
       ),
     }));
   }, []);
 
+  const createTask = useCallback(
+    (employeeId, task) =>
+      updateEmployeeTasks(employeeId, (tasks) => [...tasks, task]),
+    [updateEmployeeTasks],
+  );
+
+  const updateTaskStatus = useCallback(
+    (employeeId, taskId, status) =>
+      updateEmployeeTasks(employeeId, (tasks) =>
+        tasks.map((task) => (task.id !== taskId ? task : { ...task, status })),
+      ),
+    [updateEmployeeTasks],
+  );
+
   const value = useMemo(
-    () => ({ userData, setUserData, updateTaskStatus }),
-    [userData, updateTaskStatus],
+    () => ({ userData, createTask, updateTaskStatus }),
+    [userData, createTask, updateTaskStatus],
   );
 
   useEffect(() => {

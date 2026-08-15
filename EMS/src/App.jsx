@@ -21,11 +21,18 @@ const App = () => {
   const currentUser = useMemo(() => {
     if (!session) return null;
     const pool = session.role === "admin" ? userData.Admin : userData.Employees;
-    return pool?.find((u) => u.id === session.id) ?? null;
+    const record = pool?.find((u) => u.id === session.id);
+    if (!record) return null;
+
+    // Credentials stop at the login check. A real backend would hash the
+    // password server-side and never send it to the client at all.
+    const { password, ...safeUser } = record;
+    return safeUser;
   }, [session, userData]);
 
+  // Returns true on success so the login form can show its own error.
   const handleLogin = (email, password) => {
-    if (!userData) return;
+    if (!userData) return false;
 
     const admin = userData.Admin.find(
       (a) => a.email === email && a.password === password,
@@ -41,10 +48,11 @@ const App = () => {
         ? { role: "employee", id: employee.id }
         : null;
 
-    if (!found) return alert("Invalid Credentials");
+    if (!found) return false;
 
     setSession(found);
     sessionStorage.setItem("loggedInUser", JSON.stringify(found));
+    return true;
   };
 
   return (

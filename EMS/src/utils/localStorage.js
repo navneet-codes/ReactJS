@@ -214,8 +214,6 @@ const Admin = [
   },
 ];
 
-// export { Employees, Admin };
-
 export const setLocalStorage = () => {
   if (!localStorage.getItem(STORAGE_KEYS.employees)) {
     localStorage.setItem(STORAGE_KEYS.employees, JSON.stringify(Employees));
@@ -226,9 +224,16 @@ export const setLocalStorage = () => {
 };
 
 export const getLocalStorage = () => {
-  const Employees = JSON.parse(localStorage.getItem(STORAGE_KEYS.employees));
-  const Admin = JSON.parse(localStorage.getItem(STORAGE_KEYS.admin));
-
-  return { Employees, Admin };
-  // console.log(JSON.parse(Employees), JSON.parse(Admin));
+  try {
+    return {
+      Employees: JSON.parse(localStorage.getItem(STORAGE_KEYS.employees)) ?? [],
+      Admin: JSON.parse(localStorage.getItem(STORAGE_KEYS.admin)) ?? [],
+    };
+  } catch {
+    // Stored data is unreadable — discard it and reseed rather than crash.
+    localStorage.removeItem(STORAGE_KEYS.employees);
+    localStorage.removeItem(STORAGE_KEYS.admin);
+    setLocalStorage();
+    return { Employees, Admin };
+  }
 };

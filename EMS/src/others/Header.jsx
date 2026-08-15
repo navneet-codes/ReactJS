@@ -2,7 +2,7 @@ import React from "react";
 
 const Header = ({ data, handleLogout }) => {
   return (
-    <div className=" flex flex-row justify-between items-center bg-[#1c3e50] p-3">
+    <header className=" flex flex-row justify-between items-center bg-[#1c3e50] p-3">
       <div className=" text-xl">
         Hello <br />
         <span className=" text-3xl font-semibold">{data.firstName}👋</span>
@@ -15,7 +15,7 @@ const Header = ({ data, handleLogout }) => {
           LogOut
         </button>
       </div>
-    </div>
+    </header>
   );
 };
 

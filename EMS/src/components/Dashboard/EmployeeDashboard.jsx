@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import Header from "../../others/Header";
 import TaskListNumbers from "../../others/TaskListNumbers";
 import TaskList from "../TaskList/TaskList";
@@ -15,8 +15,11 @@ const EmployeeDashboard = ({ data, handleLogout }) => {
   return (
     <div className=" flex-1 flex flex-col">
       <Header data={data} handleLogout={handleLogout} />
-      <TaskListNumbers data={data} />
-      <TaskList data={data} onStatusChange={handleStatusChange} />
+      <main className=" flex-1 flex flex-col">
+        <h1 className=" sr-only">Employee dashboard</h1>
+        <TaskListNumbers data={data} />
+        <TaskList data={data} onStatusChange={handleStatusChange} />
+      </main>
     </div>
   );
 };
