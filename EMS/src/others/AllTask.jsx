@@ -2,48 +2,70 @@ import React from "react";
 import { getTaskCounts } from "../utils/taskCounts";
 import { useAuth } from "../context/useAuth";
 
+const COLUMNS = [
+  { key: "new", label: "New", value: "text-emerald-300" },
+  { key: "active", label: "Active", value: "text-amber-300" },
+  { key: "completed", label: "Completed", value: "text-sky-300" },
+  { key: "failed", label: "Failed", value: "text-rose-300" },
+];
+
 const AllTask = () => {
   const { userData } = useAuth();
 
   return (
-    <div className=" flex flex-col items-center mt-20 overflow-auto">
-      <div className=" bg-red-400 flex justify-between w-[80%] mb-10 py-2 px-4">
-        <h2 className=" w-1/5 ">Employee Name</h2>
-        <h3 className=" w-1/5 ">New Task</h3>
-        <h5 className=" w-1/5 ">Active Task</h5>
-        <h5 className=" w-1/5 ">Completed</h5>
-        <h5 className=" w-1/5 ">Failed</h5>
+    <section
+      aria-label="Task summary by employee"
+      className="mt-16 flex flex-col items-center px-5"
+    >
+      <div className="w-full max-w-5xl overflow-x-auto rounded-2xl border border-slate-800 shadow-lg">
+        <table className="w-full border-collapse">
+          <caption className="sr-only">Task counts for each employee</caption>
+          <thead>
+            <tr className="bg-slate-800">
+              <th
+                scope="col"
+                className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-slate-300"
+              >
+                Employee
+              </th>
+              {COLUMNS.map((column) => (
+                <th
+                  key={column.key}
+                  scope="col"
+                  className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-slate-300"
+                >
+                  {column.label}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-slate-800 bg-slate-900">
+            {userData.Employees.map((employee) => {
+              const counts = getTaskCounts(employee.tasks);
+
+              return (
+                <tr key={employee.id}>
+                  <th
+                    scope="row"
+                    className="px-4 py-3 text-left font-medium text-slate-100"
+                  >
+                    {employee.firstName}
+                  </th>
+                  {COLUMNS.map((column) => (
+                    <td
+                      key={column.key}
+                      className={`px-4 py-3 text-lg font-semibold tabular-nums ${column.value}`}
+                    >
+                      {counts[column.key]}
+                    </td>
+                  ))}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
-
-      {userData.Employees.map((element) => {
-        const counts = getTaskCounts(element.tasks);
-
-        return (
-          <div
-            key={element.id}
-            className=" flex justify-between mb-10 bg-emerald-500 py-2 px-4 rounded-xl w-[80%] "
-          >
-            <h2 className=" text-xl w-1/5 ">{element.firstName}</h2>
-
-            <h3 className=" text-xl w-1/5 text-blue-700 font-bold ">
-              {counts.newTask}
-            </h3>
-
-            <h5 className=" text-xl w-1/5 text-yellow-400 font-bold ">
-              {counts.active}
-            </h5>
-
-            <h5 className=" text-xl w-1/5 text-white font-bold ">
-              {counts.completed}
-            </h5>
-
-            <h5 className=" text-xl w-1/5 text-red-700 font-bold">
-              {counts.failed}
-            </h5>
-          </div>
-        );
-      })}
-    </div>
+    </section>
   );
 };
 

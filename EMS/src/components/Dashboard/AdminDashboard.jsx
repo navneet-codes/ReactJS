@@ -7,8 +7,11 @@ const AdminDashboard = ({ data, handleLogout }) => {
   return (
     <div>
       <Header data={data} handleLogout={handleLogout} />
-      <CreateTask data={data} />
-      <AllTask data={data} />
+      <main>
+        <h1 className="sr-only">Admin dashboard</h1>
+        <CreateTask />
+        <AllTask />
+      </main>
     </div>
   );
 };

@@ -1,31 +1,57 @@
 import React from "react";
 import { getTaskCounts } from "../utils/taskCounts";
 
+const CARDS = [
+  {
+    key: "active",
+    label: "Active Tasks",
+    stripe: "border-amber-400",
+    value: "text-amber-300",
+  },
+  {
+    key: "new",
+    label: "New Tasks",
+    stripe: "border-emerald-400",
+    value: "text-emerald-300",
+  },
+  {
+    key: "completed",
+    label: "Completed",
+    stripe: "border-sky-400",
+    value: "text-sky-300",
+  },
+  {
+    key: "failed",
+    label: "Failed",
+    stripe: "border-rose-400",
+    value: "text-rose-300",
+  },
+];
+
 const TaskListNumbers = ({ data }) => {
   const counts = getTaskCounts(data.tasks);
 
   return (
-    <div className=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 py-10 px-5 w-full">
-      <div className=" bg-green-500 min-w-90 max-w-full rounded-4xl p-10 flex flex-col justify-between">
-        <h2 className=" text-6xl font-semibold">{counts.active}</h2>
-        <h3 className=" text-6xl font-medium">Active Task</h3>
-      </div>
-
-      <div className=" bg-blue-500 min-w-90 rounded-4xl p-10 flex flex-col justify-between">
-        <h2 className=" text-6xl font-semibold">{counts.newTask}</h2>
-        <h3 className=" text-6xl font-medium">New Task</h3>
-      </div>
-
-      <div className=" bg-red-500 min-w-90 rounded-4xl p-10 flex flex-col justify-between">
-        <h2 className=" text-6xl font-semibold">{counts.completed}</h2>
-        <h3 className=" text-6xl font-medium">Completed Task</h3>
-      </div>
-
-      <div className=" bg-yellow-500 min-w-90 rounded-4xl p-10 flex flex-col justify-between">
-        <h2 className=" text-6xl font-semibold">{counts.failed}</h2>
-        <h3 className=" text-6xl font-medium">Failed Task</h3>
-      </div>
-    </div>
+    <section
+      aria-label="Task summary"
+      className="grid w-full grid-cols-1 gap-4 px-5 py-8 sm:grid-cols-2 lg:grid-cols-4"
+    >
+      {CARDS.map((card) => (
+        <article
+          key={card.key}
+          className={`${card.stripe} min-w-0 rounded-2xl border-l-4 bg-slate-900 p-6 shadow-lg`}
+        >
+          <p
+            className={`text-5xl font-semibold tabular-nums ${card.value}`}
+          >
+            {counts[card.key]}
+          </p>
+          <h2 className="mt-2 text-sm font-medium uppercase tracking-wider text-slate-400">
+            {card.label}
+          </h2>
+        </article>
+      ))}
+    </section>
   );
 };
 
